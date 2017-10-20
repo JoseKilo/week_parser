@@ -1,0 +1,8 @@
+[run]
+branch = false
+[report]
+sort = cover
+fail_under = 95
+show_missing = true
+exclude_lines =
+    if __name__ == .__main__.:
