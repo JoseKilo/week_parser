@@ -33,11 +33,24 @@ expected_output_3 = (
 """
 )
 
+missing_days_output = (
+    """[{'day': 'mon', 'description': 'third_desc 9', 'square': 9, 'value': 3},
+ {'day': 'tue', 'description': 'third_desc 9', 'square': 9, 'value': 3},
+ {'day': 'wed', 'description': 'third_desc 4', 'square': 4, 'value': 2},
+ {'day': 'fri', 'description': 'third_desc 2', 'double': 2, 'value': 1}]
+"""
+)
+
 
 test_files = {
     os.path.join('csv_files', '1.csv'): expected_output_1,
     os.path.join('csv_files', '2.csv'): expected_output_2,
     os.path.join('csv_files', '3.csv'): expected_output_3,
+    os.path.join('csv_files', 'column_no_name.csv'): expected_output_3,
+    os.path.join('csv_files', 'multiple_rows.csv'): expected_output_3,
+    os.path.join('csv_files', 'missing_days.csv'): missing_days_output,
+    os.path.join('csv_files', 'empty.csv'): '[]\n',
+    os.path.join('csv_files', 'only_headers.csv'): '[]\n',
 }
 
 
@@ -79,19 +92,6 @@ def test_main_not_int_value(capsys):
     assert out == ''
     assert err == ("Invalid file format: "
                    "invalid literal for int() with base 10: 'not an int'\n")
-
-
-def test_main_empty_file(capsys):
-    """
-    If the file is empty, we get an empty list of days
-    """
-    filename = os.path.join('csv_files', 'empty.csv')
-
-    main([filename])
-
-    out, err = capsys.readouterr()
-    assert err == ''
-    assert out == '[]\n'
 
 
 def test_get_options():
