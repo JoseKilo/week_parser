@@ -1,6 +1,7 @@
 from __future__ import print_function
 
 import argparse
+import sys
 from pprint import pprint
 
 from week_parser.base import parse_week
@@ -21,8 +22,13 @@ def main(args=None):
     If it gets called without arguments argparse will use 'sys.argv'.
     """
     args = get_options(args)
-    result = parse_week(args.filename)
-    pprint(result)
+    try:
+        result = parse_week(args.filename)
+        pprint(result)
+    except IOError as exc:
+        print(exc.strerror, file=sys.stderr)
+    except ValueError as exc:
+        print('Invalid file format: {}'.format(exc), file=sys.stderr)
 
 
 if __name__ == '__main__':

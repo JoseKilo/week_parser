@@ -54,6 +54,46 @@ def test_main(capsys):
         assert out == expected_output
 
 
+def test_main_file_does_not_exist(capsys):
+    """
+    If the input file doesn't exist, we get an error message
+    """
+    filename = 'does_not_exist.csv'
+
+    main([filename])
+
+    out, err = capsys.readouterr()
+    assert out == ''
+    assert err == 'No such file or directory\n'
+
+
+def test_main_not_int_value(capsys):
+    """
+    If the day value is not an integer, we get an error message
+    """
+    filename = os.path.join('csv_files', 'not_int_value.csv')
+
+    main([filename])
+
+    out, err = capsys.readouterr()
+    assert out == ''
+    assert err == ("Invalid file format: "
+                   "invalid literal for int() with base 10: 'not an int'\n")
+
+
+def test_main_empty_file(capsys):
+    """
+    If the file is empty, we get an empty list of days
+    """
+    filename = os.path.join('csv_files', 'empty.csv')
+
+    main([filename])
+
+    out, err = capsys.readouterr()
+    assert err == ''
+    assert out == '[]\n'
+
+
 def test_get_options():
     """
     A valid path argument will produce a valid argparse object

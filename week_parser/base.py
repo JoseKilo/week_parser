@@ -22,7 +22,7 @@ def parse_week(filename):
         for row in reader:
             week_data = parse_row(row)
 
-    return [week_data[day] for day in DAYS]
+    return [week_data[day] for day in DAYS if week_data.get(day) is not None]
 
 
 def parse_row(row):
@@ -41,11 +41,12 @@ def parse_row(row):
             week_data[column] = {'day': column, 'value': int(value)}
         elif column is not None and '-' in column:
             start, end = column.split('-')
-            start, end = DAY_TO_NUMBER[start], DAY_TO_NUMBER[end]
+            start, end = DAY_TO_NUMBER.get(start), DAY_TO_NUMBER.get(end)
 
-            for number in six.moves.xrange(start, end + 1):
-                day = NUMBER_TO_DAY[number]
-                week_data[day] = {'day': day, 'value': int(value)}
+            if start is not None and end is not None:
+                for number in six.moves.xrange(start, end + 1):
+                    day = NUMBER_TO_DAY[number]
+                    week_data[day] = {'day': day, 'value': int(value)}
 
     populate_extra_data(week_data, description)
 
