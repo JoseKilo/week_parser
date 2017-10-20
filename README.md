@@ -39,3 +39,53 @@ For each day we store a value, description and some day's specific data:
 - For thu, fri it is a `double` field.
 
 Note that the `description` field contains day's specific data.
+
+## Requirements
+
+To build and install the python package:
+
+```bash
+virtualenv .venv
+. .venv/bin/activate
+pip install -e .
+```
+
+All the dependencies are installed automatically, but you can also install them
+from the `requirements.txt` file:
+
+```bash
+pip install -r requirements.txt
+```
+
+## Usage
+
+To run the application (once the package is installed):
+
+```bash
+week_parser <csv_file.csv>
+```
+
+## Tests
+
+To run the tests:
+
+```bash
+python setup.py test
+```
+
+You could also call `pytest` directly:
+
+```bash
+pytest
+```
+
+To run the tests in every supported environment:
+
+```bash
+tox
+```
+
+## Compatibility
+
+- Tested on GNU/Linux.
+- Tested on Python 2.7.12 and 3.5.2
