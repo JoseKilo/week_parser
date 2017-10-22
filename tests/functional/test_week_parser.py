@@ -53,6 +53,15 @@ non_ascii_output = (
 """
 )
 
+escaped_chars_output = (
+    """[{'day': 'mon', 'description': '\\'A\\', "b" 9', 'square': 9, 'value': 3},
+ {'day': 'tue', 'description': '\\'A\\', "b" 9', 'square': 9, 'value': 3},
+ {'day': 'wed', 'description': '\\'A\\', "b" 4', 'square': 4, 'value': 2},
+ {'day': 'thu', 'description': '\\'A\\', "b" 4', 'double': 4, 'value': 2},
+ {'day': 'fri', 'description': '\\'A\\', "b" 2', 'double': 2, 'value': 1}]
+"""
+)
+
 
 test_files = {
     os.path.join('csv_files', '1.csv'): expected_output_1,
@@ -64,6 +73,7 @@ test_files = {
     os.path.join('csv_files', 'empty.csv'): '[]\n',
     os.path.join('csv_files', 'only_headers.csv'): '[]\n',
     os.path.join('csv_files', 'non_ascii.csv'): non_ascii_output,
+    os.path.join('csv_files', 'escaped_chars.csv'): escaped_chars_output,
 }
 
 

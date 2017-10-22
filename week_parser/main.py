@@ -21,7 +21,8 @@ class PrettyPrinter(pprint.PrettyPrinter):
 
     def format(self, obj, context, maxlevels, level):
         if isinstance(obj, six.binary_type) or hasattr(obj, 'decode'):
-            return (six.u("'{}'").format(obj.decode('UTF-8')), True, False)
+            obj = obj.decode('UTF-8').replace("'", "\\'")
+            return (six.u("'{}'").format(obj), True, False)
         return pprint.PrettyPrinter.format(self, obj,
                                            context, maxlevels, level)
 

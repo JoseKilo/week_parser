@@ -89,3 +89,8 @@ tox
 
 - Tested on GNU/Linux.
 - Tested on Python 2.7.12 and 3.5.2
+
+## Known issues
+
+- We assume that the CSV files are encoded using UTF-8.
+- We assume that the CSV files use the dialect preferred by Excel.
