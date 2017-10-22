@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+from __future__ import unicode_literals
+
 import os
 from argparse import Namespace
 
@@ -41,6 +44,15 @@ missing_days_output = (
 """
 )
 
+non_ascii_output = (
+    """[{'day': 'mon', 'description': 'café 9', 'square': 9, 'value': 3},
+ {'day': 'tue', 'description': 'café 9', 'square': 9, 'value': 3},
+ {'day': 'wed', 'description': 'café 4', 'square': 4, 'value': 2},
+ {'day': 'thu', 'description': 'café 4', 'double': 4, 'value': 2},
+ {'day': 'fri', 'description': 'café 2', 'double': 2, 'value': 1}]
+"""
+)
+
 
 test_files = {
     os.path.join('csv_files', '1.csv'): expected_output_1,
@@ -51,6 +63,7 @@ test_files = {
     os.path.join('csv_files', 'missing_days.csv'): missing_days_output,
     os.path.join('csv_files', 'empty.csv'): '[]\n',
     os.path.join('csv_files', 'only_headers.csv'): '[]\n',
+    os.path.join('csv_files', 'non_ascii.csv'): non_ascii_output,
 }
 
 

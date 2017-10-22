@@ -1,8 +1,10 @@
 import pytest
+import six
 from mock import call, patch
 
 from tests import utils
 from week_parser.base import parse_row, parse_week, populate_extra_data
+from week_parser.main import PrettyPrinter
 
 
 def test_populate_extra_data_no_days():
@@ -181,3 +183,23 @@ def test_parse_week_valid_file():
     assert result == [{'day': 'mon'}]
     assert mock_open.call_args_list == [call(filename)]
     assert mock_parse_row.call_args_list == [call(expected_row)]
+
+
+def test_pprint_bytes(capsys):
+    printer = PrettyPrinter()
+
+    printer.pprint(six.b('__FOO__'))
+
+    out, err = capsys.readouterr()
+    assert err == ''
+    assert out == "'__FOO__'\n"
+
+
+def test_pprint_unicode(capsys):
+    printer = PrettyPrinter()
+
+    printer.pprint(six.u('__FOO__'))
+
+    out, err = capsys.readouterr()
+    assert err == ''
+    assert out == "'__FOO__'\n"
